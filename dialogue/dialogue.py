@@ -17,7 +17,7 @@ class Dialogue:
     async def on_message(self, message):
         chance = random.randint(0, 100)
 
-        _require = await self.config.guild(ctx.guild).chance()
+        _require = await self.config.guild(message.guild).chance()
 
         if chance <= _require:
             await message.channel.send(random.choice(self.insults))
