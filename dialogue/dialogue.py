@@ -15,12 +15,16 @@ class Dialogue:
         )
 
     async def on_message(self, message):
-        chance = random.randint(0, 100)
+        _is_active = await self.config.guild(message.guild).active()
+        if _is_active:
+            chance = random.randint(0, 100)
 
-        _require = await self.config.guild(message.guild).chance()
+            _require = await self.config.guild(message.guild).chance()
 
-        if chance <= _require:
-            await message.channel.send(random.choice(self.insults))
+            if chance <= _require:
+                await message.channel.send(random.choice(self.insults))
+        else:
+            pass
 
 
     @commands.group()
@@ -37,7 +41,7 @@ class Dialogue:
     @dialogue.command()
     @checks.admin_or_permissions(manage_server=True)
     async def chance(self, ctx, _chance: int):
-        _is_active = self.config.guild(ctx.guild).active()
+        _is_active = await self.config.guild(ctx.guild).active()
         if not _is_active:
             await ctx.send("Dialogue is not active")
             return
