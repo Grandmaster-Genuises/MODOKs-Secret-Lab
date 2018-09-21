@@ -6,7 +6,7 @@ class Dialogue:
 
     def __init__(self, bot):
         self.bot = bot
-        self.insults = ["Kill!!!", "Fry!!!", "Peasant!!!", "Idiot!!!"]
+        self.insults = ["Kill!!!", "Fry!!!", "Peasant!!!", "Idiot!!!", "Silence!!!", "Buffoon!!!"]
         self.config = Config.get_conf(self, identifier=2547813692)
 
         self.config.register_guild(
@@ -15,6 +15,8 @@ class Dialogue:
         )
 
     async def on_message(self, message):
+        if message.author.bot:
+            return
         _is_active = await self.config.guild(message.guild).active()
         if _is_active:
             chance = random.randint(0, 100)
