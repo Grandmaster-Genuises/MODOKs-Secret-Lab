@@ -2,7 +2,9 @@ import discord
 from redbot.core import commands, checks, Config
 import random
 
-class Dialogue:
+BaseCog = getattr(commands, "Cog", object)
+
+class Dialogue(BaseCog):
 
     def __init__(self, bot):
         self.bot = bot

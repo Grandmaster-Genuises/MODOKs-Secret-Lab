@@ -1,7 +1,9 @@
 import discord
 from redbot.core import commands
 
-class Story:
+BaseCog = getattr(commands, "Cog", object)
+
+class Story(BaseCog):
 
     def __init__(self, bot):
         self.bot = bot
